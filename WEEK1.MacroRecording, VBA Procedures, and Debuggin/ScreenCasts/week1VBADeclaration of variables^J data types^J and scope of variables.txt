@@ -1,0 +1,54 @@
+Option Explicit
+Public pi As Double 'we have declared pi at the modular level this means it is public
+
+Sub Sphere()
+Dim R As Double, Area As Double, Volume As Double
+pi = 4 * Atn(1)
+R = InputBox("Please enter radius:")
+Area = 4 * pi * R ^ 2
+MsgBox ("Surface area of the sphere is " & FormatNumber(Area, 1) & ".")
+Volume = SphereVolume(R)
+MsgBox ("Volume of the sphere is " & FormatNumber(Volume, 1) & ".")
+End Sub
+
+'This is in module2. I combined all three modules in this txt file
+Option Explicit
+
+'As expected wont work so we must go to module1 and
+'change it to public
+Function SphereVolume(rad As Double) As Double
+SphereVolume = 4 / 3 * pi * rad ^ 3
+End Function
+
+Option Explicit
+
+Sub NonStaticExample()
+Dim d As Integer
+d = d + 1
+MsgBox d
+End Sub
+
+'Sub StaticExample()
+'Preserves the value for as long as the programming is running
+'Static d As Integer
+'d = d + 1
+'MsgBox d
+'End Sub
+
+Sub StaticExample(Optional reset As Boolean)
+Static d As Integer
+If reset Then d = 0
+d = d + 1
+MsgBox d
+End Sub
+
+Sub ResetStatic()
+StaticExample (True)
+End Sub
+
+Sub statictest()
+Static i As Integer
+i = i + 1
+MsgBox i
+If i = 3 Then i = 0
+End Sub
