@@ -1,0 +1,27 @@
+Option Explicit
+
+'Create a VBA sub that asks user for a number then the square of
+'the number will be output in a message.
+Sub SquareNumber()
+
+Dim x As Integer, y As Integer
+x = InputBox("Enter a number:")
+y = x ^ 2
+MsgBox "The square of " & x & " is " & y & ""
+End Sub
+
+''Create a function Savings that will calculate
+'the total savings(S) given the principle(P),
+'interest rate(i), and time (n,years):
+Function Savings(P As Double, i As Double, n As Double) As Double
+Savings = P * (1 + i) ^ n
+End Function
+
+Sub DeleteRows(n1 As Integer, n2 As Integer)
+Rows(n1 & ":" & n2).EntireRow.Select
+Selection.Delete shift:=xlUp
+End Sub
+
+Sub RunDeleteRows()
+Call DeleteRows(3, 6)
+End Sub
