@@ -1,0 +1,5 @@
+Option Explicit
+
+Function efficiency(w As Double, s As Double) As Double
+efficiency = (6.12 - w / 60000) * 0.92 ^ ((s - 55) / 5)
+End Function
