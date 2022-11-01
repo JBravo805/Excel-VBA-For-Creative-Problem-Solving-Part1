@@ -1,0 +1,10 @@
+Option Explicit
+
+Function ConeVol(R As Double, h As Double) As Double
+Dim pi As Double
+pi = 4 * Atn(1)
+ConeVol = pi * R ^ 2 * h / 3
+'MsgBox pi * R ^ 2 * h / 3
+End Function
+
+'do not use inputbox or msgbox in functions
