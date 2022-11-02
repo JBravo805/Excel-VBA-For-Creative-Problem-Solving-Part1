@@ -1,0 +1,15 @@
+Option Explicit
+
+'Sub ApplicationRunExample()
+'Application.Run "'Run Me.xlsm'!RunMe"
+'End Sub
+
+'using the sub below closes the file called Run Me when called
+Sub ApplicationRunExample()
+Dim FileName As String, awb As Workbook
+FileName = Application.GetOpenFilename("Excel Files (*.xlsm), *.xlsm")
+Workbooks.Open FileName
+Set awb = ActiveWorkbook
+Application.Run "'Run Me.xlsm'!RunMe"
+awb.Close SaveChanges:=False
+End Sub
