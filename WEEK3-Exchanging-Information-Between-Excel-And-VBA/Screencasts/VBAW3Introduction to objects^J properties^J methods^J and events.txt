@@ -1,0 +1,48 @@
+Option Explicit
+
+Sub Test()
+Range("A1").Interior.ColorIndex = 50
+End Sub
+
+Sub ClearCells()
+Selection.Clear
+End Sub
+
+Sub CopyCells()
+Range("A1:A4").Copy Range("C1:C4")
+End Sub
+
+'Lecture question
+Sub test1()
+Range("A1").ColumnWidth = 12
+End Sub
+
+Sub Restorecellsize()
+'UpdatebyExtendoffice20180626
+    Dim xSh As Worksheet
+    Set xSh = Worksheets("Sheet2")
+    With xSh
+        .Cells.UseStandardHeight = True
+        .Cells.UseStandardWidth = True
+    End With
+End Sub
+
+Sub RemoveCellColor()
+Selection.Interior.Color = xlNone
+End Sub
+
+Sub test2()
+Range("C7").Copy Range("D4")
+End Sub
+
+'Sub test3()
+'y = MsgBox Range("A2")
+'End Sub
+
+Sub test4()
+MsgBox Range("A1").ColumnWidth
+End Sub
+
+'Sub test5()
+'Range("A5").Clear = y
+'End Sub
