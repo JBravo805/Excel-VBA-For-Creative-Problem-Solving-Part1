@@ -1,0 +1,15 @@
+Option Explicit
+
+Function antoine(A As Double, B As Double, C As Double, t As Double) As Double
+antoine = 10 ^ (A - (B / (t + C)))
+End Function
+
+Function medication(C0 As Double, k As Double, t As Double) As Double
+medication = C0 * Exp(-k * t)
+'Place your code here
+End Function
+
+Function payment(P As Double, i As Double, n As Double) As Double
+payment = (P * i / 12) / (1 - (1 + i / 12) ^ (-n * 12))
+
+End Function
