@@ -1,0 +1,16 @@
+Option Explicit
+
+Sub ReplaceEmptyCells()
+Dim i As Integer, j As Integer, nr As Integer, nc As Integer
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+For i = 1 To nr
+For j = 1 To nc
+    If Selection.Cells(i, j) = "" Then Selection.Cells(i, j) = 0
+    Next j
+Next i
+End Sub
+
+Sub clearcells()
+Selection.Clear
+End Sub
