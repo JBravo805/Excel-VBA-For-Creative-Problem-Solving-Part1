@@ -1,0 +1,44 @@
+Option Explicit
+
+Sub HowMuchComplete()
+MsgBox Range("B4:D6").Count * Selection.Rows.Count + ActiveCell.Offset(-1, 2) * Range("B2:D6").Cells(3, 2)
+' 9 * 4 + -1 * 6 = 30
+End Sub
+
+
+Sub HowMuch()
+'count the number of cells in this selection 9
+MsgBox Range("b4:d6").Count
+End Sub
+
+Sub howmuch2()
+'count number of rows between active selection in this case 4 rows
+' 9 * 4 = 36
+MsgBox Range("b4:d6").Count * Selection.Rows.Count
+End Sub
+
+Sub howmuch3()
+'up one cell from activecell and two col to the right so
+'D1 = -1
+' 36 + -1 = 35
+MsgBox Range("b4:d6").Count * Selection.Rows.Count + ActiveCell.Offset(-1, 2)
+End Sub
+
+Sub howmuch4()
+'up one cell from activecell and two col to the right
+'D1 = -1
+MsgBox ActiveCell.Offset(-1, 2)
+End Sub
+
+Sub howmuch5()
+'from this selected region three rows down and two col right
+'so 6
+MsgBox Range("b2:d6").Cells(3, 2)
+End Sub
+
+Sub howmuch6()
+'putting it all together
+'from the selected region three rows down and two col right
+'so C4 = 6 and we have 36 + -1 * 6 = 30
+MsgBox Range("b4:d6").Count * Selection.Rows.Count + ActiveCell.Offset(-1, 2) * Range("b2:d6").Cells(3, 2)
+End Sub

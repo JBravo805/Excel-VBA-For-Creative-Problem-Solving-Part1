@@ -1,0 +1,72 @@
+Option Explicit
+
+Sub test1()
+Range("A2:C6").Select
+End Sub
+
+Sub test2()
+MsgBox Range("A2:C6").Range("B2")
+'from the example of the selected range
+'think of that as its own region so b2 is -2 in that
+'region
+End Sub
+
+Sub test3()
+MsgBox Selection.Cells(3, 2)
+'Recall that cells refers to all the cells in the
+'spreadsheet
+'So, we can do a subproperty of a property, which
+'means that we are referring to cells row three
+'column two of our selection.
+End Sub
+
+Sub test4()
+MsgBox Selection(3, 2)
+End Sub
+
+Sub test5()
+MsgBox Selection.Range("b2")
+End Sub
+
+Sub test6()
+Selection.Range("b2:c3").Select
+End Sub
+
+Sub test7()
+Selection.Cells(2, 3).Select
+End Sub
+
+Sub test8()
+MsgBox Selection.Cells(2, 3).Activate
+End Sub
+
+Sub test9()
+MsgBox ActiveCell.Offset(1, 1)
+'down one row, one col to the right
+'if we change to (-2,2) up two rows 2 cols to the right
+End Sub
+
+Sub test10()
+ActiveCell.Offset(-4, 2).Select
+End Sub
+
+Sub test11()
+Dim nr As Integer, nc As Integer, p As Integer
+p = Range("A1:C5").Select
+MsgBox Range("A1:C5").Rows.Count
+nr = Range("A1:C5").Rows.Count
+nc = Range("A1:C5").Columns.Count
+End Sub
+
+Sub test12()
+Dim nr As Integer, nc As Integer
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+End Sub
+
+Sub test13()
+Dim rowindex As Integer, col As String
+rowindex = InputBox("Enter row number:")
+col = InputBox("Enter column letter:")
+MsgBox Range(col & rowindex)
+End Sub
