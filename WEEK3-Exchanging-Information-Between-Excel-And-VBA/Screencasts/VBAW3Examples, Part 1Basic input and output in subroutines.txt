@@ -1,0 +1,84 @@
+Option Explicit
+
+'How would you make a vba sub that would take a value
+'from an input box and:
+
+'Display the square root in a msg box
+Sub SquareRoot()
+Dim x As Double, y As Double
+x = InputBox("Enter a number:")
+y = Sqr(x)
+MsgBox ("The square root of " & x & " is " & y & ".")
+End Sub
+
+'Display the square root in the active cell
+Sub SquareRoot2()
+Dim x As Double, y As Double
+x = InputBox("Enter a number:")
+y = Sqr(x)
+ActiveCell = FormatNumber(y, 2)
+End Sub
+
+'Display the square root in c3
+Sub SquareRoot3()
+Dim x As Double, y As Double
+x = InputBox("Enter a number:")
+y = Sqr(x)
+Range("C3") = FormatNumber(y, 2)
+End Sub
+
+'Example2: How would you make a vba sub that would take the
+'value in cell A1 and:
+
+'Display the square root in a msgbox
+Sub SquareRoot4()
+Dim x As Double, y As Double
+x = Range("A1")
+y = Sqr(x)
+MsgBox ("The square root of " & x & " is " & y & ".")
+End Sub
+
+'Display the square root in the active cell?
+Sub SquareRoot5()
+Dim x As Double, y As Double
+x = Range("A1")
+y = Sqr(x)
+ActiveCell = FormatNumber(y, 2)
+End Sub
+
+'Display the square root in cell C3?
+Sub SquareRoot6()
+Dim x As Double, y As Double
+x = Range("A1")
+y = Sqr(x)
+Range("C3") = FormatNumber(y, 2)
+End Sub
+
+'Given the spreadsheet setup shown, what value is displayed in the
+'message box when the WhatHappens subroutine is executed and the user
+'inputs 4 into the input box?
+Sub test()
+MsgBox Range("b2:d3").Count
+'count # of cells in this region 6
+End Sub
+
+Sub test2()
+MsgBox Range("b2:d3").Count * ActiveCell
+' 6 * -4 = -24
+End Sub
+
+Sub test3()
+'cells counts 5 rows down and two col to the right which is
+'B5=7
+MsgBox Cells(5, 2)
+End Sub
+Sub test4()
+MsgBox Range("b2:d3").Count * ActiveCell + Cells(5, 2)
+' 6 * -4 + 7 = -17
+End Sub
+
+Sub WhatHappens()
+'Question says user enters 4 so
+' 6 * -4 + 7 * 4 = 4
+MsgBox Range("b2:d3").Count * ActiveCell + Cells(5, 2) * InputBox("Enter a number:")
+End Sub
