@@ -1,0 +1,32 @@
+Option Explicit
+
+Sub ErrorHandling()
+Dim x As Double
+x = InputBox("Enter volume in gallons:")
+MsgBox (x & " gallons is equal to " & FormatNumber(x / 7.48, 2) & " cubic feet.")
+End Sub
+
+'if user enter string, cancel
+'this will prompt an error box which is unprofessional
+'we need to fix this error so if click cancel it closes
+
+Sub ErrorHandling2()
+Dim x As Double
+On Error GoTo here
+x = InputBox("Enter volume in gallons:")
+MsgBox (x & " gallons is equal to " & FormatNumber(x / 7.48, 2) & " cubic feet.")
+here:
+MsgBox "There was an error!"
+End Sub
+
+'However the above will also msgbox "There was an error!"
+'To fix this we need to implement exit sub
+Sub ErrorHandling3()
+Dim x As Double
+On Error GoTo here
+x = InputBox("Enter volume in gallons:")
+MsgBox (x & " gallons is equal to " & FormatNumber(x / 7.48, 2) & " cubic feet.")
+Exit Sub
+here:
+MsgBox "There was an error!"
+End Sub
