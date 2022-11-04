@@ -1,0 +1,76 @@
+Option Explicit
+
+'Create a VBA sub that will square cell(2,2) of a
+'current selection and place it in cell A1
+Sub SquareCell()
+Dim x As Double, y As Double
+x = Selection.Cells(2, 2)
+y = x ^ 2
+Range("A1") = y
+End Sub
+
+
+'Example 4 : Create a VBA sub that will display the rows and
+'columns of a selection and display in a msg box
+Sub Example4()
+Dim nr As Double, nc As Double
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+MsgBox ("Your selection has " & nr & " rows and " & nc & " columns .")
+End Sub
+
+'Example 5: Create a VBA sub that asks the user for a number
+'with an input box, then adds that number to the current active cell
+'and places the result in a cell that is
+'2 cells right and 2 cells down from the current active cell.
+
+Sub Example5()
+Dim x As Integer, z As Integer
+x = InputBox("Enter a number:")
+ActiveCell.Offset(2, 2) = x + ActiveCell
+z = ActiveCell.Offset(2, 2)
+MsgBox z
+End Sub
+Sub example6()
+Dim x As Integer, y As Integer, z As Integer
+x = InputBox("Enter a number:")
+y = ActiveCell
+z = x + y
+ActiveCell.Offset(2, 2) = z
+MsgBox z
+End Sub
+'Question: With the spreadsheet setup shown and if the user enters 2
+'in the input box, what value will result in the message box when
+'WhatResults is executed?
+'For illustration purposes I've taken this apart to understand
+'what is going on. Last sub is putting it all together.
+'!note the active cell in this example is A3 =-4
+Sub test()
+'Two rows up and Two col righ
+'C1 = -1
+MsgBox ActiveCell.Offset(-2, 2)
+End Sub
+
+Sub test2()
+'Three rows down and one col to the right so B6=1
+MsgBox ActiveCell.Offset(3, 1)
+End Sub
+
+Sub test3()
+'(-1,1) so up one row and one col to the right
+'B2 = 5
+MsgBox ActiveCell.Offset(ActiveCell.Offset(-2, 2), ActiveCell.Offset(3, 1))
+End Sub
+
+Sub WhatResults()
+Dim x As Integer, y As Integer
+x = InputBox("Enter a number:")
+'From above this is (-1,1) or B2=5
+ActiveCell.Offset(ActiveCell.Offset(-2, 2), ActiveCell.Offset(3, 1)).Select
+y = ActiveCell
+'Cells references the entire sheet so starting from A1
+'down 5 rows and two col to the right
+'so this is (5, 2) or B5 = 7
+MsgBox Cells(y, x)
+
+End Sub
