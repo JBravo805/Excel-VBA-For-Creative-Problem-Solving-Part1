@@ -1,0 +1,33 @@
+Option Explicit
+
+Sub AddNumbersA()
+'Place your code here
+Dim x As Integer
+x = InputBox("Enter a number to add to the value in cell D4:")
+Range("G12") = x + Range("D4").Value
+End Sub
+
+Sub AddNumbersB()
+'Place your code here
+Dim x As Integer, y As Integer
+x = InputBox("Enter a number:")
+y = ActiveCell + x
+ActiveCell.Offset(-3, 2) = y
+MsgBox y
+End Sub
+
+Sub WherePutMe()
+'Place your code here
+Dim nr As Integer, nc As String
+x = InputBox("Enter a number:")
+y = InputBox("Enter a letter:")
+Range(y & x) = Selection.Cells(2, 2)
+End Sub
+
+Sub Swap()
+'Place your code here
+Dim temp As Integer
+temp = Selection.Cells(1, 1)
+Selection.Cells(1, 1) = Selection.Cells(1, 2)
+Selection.Cells(1, 2) = temp
+End Sub
