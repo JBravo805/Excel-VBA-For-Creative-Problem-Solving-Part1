@@ -1,0 +1,12 @@
+Option Explicit
+
+Sub test()
+Dim x As Integer, rng As String, y As Integer, z As Integer
+x = InputBox("Please enter a value to add to the value in cell A1:")
+y = Range("A1")
+z = x + y
+'For rng we may place in multiple cells i.e.,
+'A4:C9' or simply B5
+rng = InputBox("Please enter a cell to place result in:")
+Range(rng) = z
+End Sub
