@@ -1,0 +1,68 @@
+Option Explicit
+
+'Example: Create a VBA subroutine that asks a user for an interger.
+'If the integer is even, the sub tell the user.
+'If the integer is odd, the sub tells the user.
+'Handle string, cancel, exit or blank, non-integer.
+
+Sub IsEvenOrOdd()
+'This handles if user
+'does not enter anything and clicks enter > tells user did not enter anything
+'Clicks cancel or exit > simply cancels
+'Enters a string > Tells user they entered a string and not an integer
+'Enters a non-integer > Tells user must enter an integer
+Dim x As Variant
+'A 3 means it can accommodate strings and numbers
+'The Application.InputBox method is designed st if user
+'cancels or closes out. The return value on the left side of
+'the equality is false
+x = Application.InputBox("Enter a number: ", , , , , , , 3)
+'when user clicks cancel or exit then exit sub
+If x = False Then Exit Sub
+If IsNumeric(x) Then
+' If x is even and x is an integer then
+    If x Mod 2 = 0 And CStr(CInt(x)) = x Then
+        MsgBox "The number " & x & " is even."
+        Exit Sub
+        ' If x is not an integer then msgbox.
+        'so if you enter 5.5 then msgbox
+    ElseIf CStr(CInt(x)) <> x Then
+        MsgBox ("Guess must be an integer! Try again.")
+        'Checks if x is odd
+    ElseIf x Mod 2 <> 0 Then
+        MsgBox "The number " & x & " is odd."
+    End If
+    'If user does not enter anything and clicks ok then msg
+ElseIf x = "" Then
+        MsgBox "You didn't enter anything! Try again."
+Else
+    MsgBox "You must enter an integer and not a string! Try again!"
+    
+End If
+    
+End Sub
+
+Sub ReplaceBlankWithZero()
+If ActiveCell = "" Then
+    ActiveCell = 0
+End If
+End Sub
+
+Sub ReplaceBlankWithZero2()
+If IsEmpty(ActiveCell) Then ActiveCell = 0
+End Sub
+
+Sub ReplaceSelectionBlankWithZero()
+Dim i As Integer, j As Integer, nr As Integer, nc As Integer
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+For i = 1 To nr
+For j = 1 To nc
+    If Selection.Cells(i, j) = "" Then Selection.Cells(i, j) = 0
+Next j
+Next i
+End Sub
+
+Sub ClearCells()
+Selection.Clear
+End Sub
