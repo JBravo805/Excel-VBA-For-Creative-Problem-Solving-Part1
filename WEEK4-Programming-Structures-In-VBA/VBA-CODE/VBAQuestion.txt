@@ -1,0 +1,14 @@
+Option Explicit
+
+'create a subroutine called Swap that will always result in a pair of
+'cells being ordered with the lesser of the two of them on the left and
+'the greater of the two of them on the right
+
+Sub Swap()
+Dim temp As Double
+If Selection.Cells(1, 1) > Selection.Cells(1, 2) Then
+    temp = Selection.Cells(1, 1)
+    Selection.Cells(1, 1) = Selection.Cells(1, 2)
+    Selection.Cells(1, 2) = temp
+End If
+End Sub
