@@ -1,0 +1,11 @@
+'End of video question
+'write the code for the flowchart
+Function test(x As Double) As Double
+If x < 100 Then
+    If x > 10 Then
+        test = Log(x)
+    Else
+        test = x
+Else
+    test = -x
+End Function
