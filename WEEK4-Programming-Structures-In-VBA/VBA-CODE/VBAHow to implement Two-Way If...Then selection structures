@@ -1,0 +1,129 @@
+Option Explicit
+
+'Example: A 2-piece engineering formula
+
+Sub Fluid()
+Dim R As Integer, Fluid As Double
+R = InputBox("Enter a number:")
+If R < 2000 Then
+    Fluid = 16 / R
+    MsgBox Fluid
+Else
+    Fluid = 0.079 / R ^ (1 / 4)
+    MsgBox Fluid
+End If
+End Sub
+
+'Example: How would you create a VBA sub that would add 20
+'to a cell's value if the number were positive and subtract 20
+'from the cell's value if the number were not positive?
+Sub AddOrSubtractTwenty()
+If ActiveCell > 0 Then
+    ActiveCell = ActiveCell + 20
+    MsgBox ActiveCell
+Else
+    ActiveCell = ActiveCell - 20
+    MsgBox ActiveCell
+End If
+End Sub
+Sub IsPositiveOrIsNegative()
+'If user
+'Does not enter anything and clicks ok then tells user
+'Clicks cancel or exit > no error msg and will end sub
+'Enters a string > Tells user they entered str instead of integer
+'Enters non-integer > Tells user must enter integer
+Dim x As Variant, pos As Integer, neg As Integer
+'A 3 means it can accomodate strings and numbers
+'The application.InputBox method is designed st if user
+'cancels or closes out. The return value on the left hand side of
+'the equality is false
+x = Application.InputBox("Enter a number: ", , , , , , , 3)
+'When user clicks cancel or exit sub > no error message
+'Caviat since zero is False in vba if user enters 0
+'Then the sub will end. Cancel and exit have value of False
+If x = False Then Exit Sub
+'Returns True if the expression is valid number.
+If IsNumeric(x) Then
+    'If x is positve and an integer then add 20
+    If x > 0 And CStr(CInt(x)) = x Then
+    pos = x + 20
+    MsgBox pos
+    Exit Sub
+    'Checks if the number is an integer
+    ElseIf CStr(CInt(x)) <> x Then
+        MsgBox "Guess must be an integer! Try again."
+    'Checks if x is negative then subtract 20
+    Else
+        neg = x - 20
+        MsgBox neg
+    End If
+    'If user does not enter anything and clicks enter then
+ElseIf x = "" Then
+    MsgBox "You did not enter anything! Try again."
+    'If user enters a string
+Else
+    MsgBox "You must enter an integer and not a string! Try again!"
+End If
+End Sub
+
+'Write a function that will output "biz" if the number is
+'divisible by 3, "buz" if the number is divisible by 5, and
+' "bizbuz" if the number is divisible by both 3 and 5."
+Function bizbuz2(x As Integer) As String
+If x Mod 3 = 0 Then
+    If x Mod 5 = 0 Then
+        bizbuz2 = "bizbuz"
+    Else
+        bizbuz2 = "biz"
+    End If
+ElseIf x Mod 5 = 0 Then
+    bizbuz2 = "buz"
+End If
+End Function
+Sub BizOrBuzOrBizbuz()
+'If user
+'Does not enter anything and click ok > Tells user
+'Clicks cancel or exit > no error msg and will end sub
+'Enters a string > Tells user they entered str instead of integer
+'Enters non-integer > Tells user must enter integer
+'A vba variable called variant has not been declared to have a
+'specific data type.Thus, it can hold any type of data
+Dim x As Variant
+'A 3 means it can accomodate strings and numbers
+'The application.inputbox method is designed st if user
+'cancels or closes out. The return value on the left side of the
+'equality is false
+x = Application.InputBox("Enter a number that is divisible by 3 or 5 or both: ", , , , , , , 3)
+If x = False Then Exit Sub
+If IsNumeric(x) Then
+    If CStr(CInt(x)) <> x Then
+    MsgBox "Guess must be an integer! Try again."
+    'The CStr(CInt(x)) = x is not necessary since previous line
+    'Check if its an integer
+    ElseIf x Mod 3 = 0 And x Mod 5 = 0 And CStr(CInt(x)) = x Then
+        MsgBox "bizbuz"
+    ElseIf x Mod 5 = 0 Then
+        MsgBox "buz"
+    ElseIf x Mod 3 = 0 Then
+        MsgBox "biz"
+    Else
+        MsgBox "This integer is not divisible by 3 or 5 or 15."
+    End If
+ElseIf x = "" Then
+    MsgBox "You didn't enter anything! Try again."
+Else
+    MsgBox "You entered a string! Try again."
+End If
+End Sub
+
+'End of video question
+'Show the correct vba code to implement the piecewise function
+'Assume that x will always be non-negative value when input
+'into the function.
+Function PieceWise(x As Integer) As Integer
+If x >= 0 And x <= 1 Then
+    PieceWise = Sqr(x)
+Else
+    PieceWise = (2 * x - 1) ^ 2
+End If
+End Function
