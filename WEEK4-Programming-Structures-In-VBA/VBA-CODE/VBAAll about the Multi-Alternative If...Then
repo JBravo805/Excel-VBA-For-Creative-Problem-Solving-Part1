@@ -1,0 +1,75 @@
+Option Explicit
+
+'Example: How would you create a function grade in
+'VBA that would assign a letter grade to a numeric score?
+Function grade(score As Integer) As String
+If 90 <= score And score < 100 Then
+    grade = "A"
+ElseIf 80 <= score And score < 90 Then
+    grade = "B"
+ElseIf 70 <= score And score < 80 Then
+    grade = "C"
+ElseIf 60 <= score And score < 70 Then
+    grade = "D"
+Else
+    grade = "F"
+    
+End If
+End Function
+
+Function grade2(score As Double) As String
+If score >= 90 Then
+    grade2 = "A"
+ElseIf score >= 80 Then
+    grade2 = "B"
+ElseIf score >= 70 Then
+    grade2 = "C"
+ElseIf score >= 60 Then
+    grade2 = "D"
+Else
+    grade2 = "F"
+End If
+End Function
+
+'create a VBA subroutine that asks user to enter a score
+'
+Sub checkyourscore()
+'If user
+'Does not enter anything and clicks enter then tells user
+'Clicks cancel or exit then ends
+'Enters
+'Enters non-string then tells user to enter numeric score
+'Variant variable that has not been declared to have a specific
+'data type
+Dim score As Variant
+'A 3 means it can accomodate strings and numbers
+'The application inputbox method is designed st if user
+'cancels or closes out. The return value on the left hand side of
+'the equality is false
+score = Application.InputBox("Enter your score: ", , , , , , , 3)
+'When user clicks cancel or exit > We will not get an error msg
+'Caviat since zero is False in vba if user enters 0 then sub ends
+'Cancel/exit have value of False=0
+If score = False Then Exit Sub
+'Checks if input is numeric value
+If IsNumeric(score) Then
+    If score >= 90 Then
+        MsgBox "A"
+    ElseIf score >= 80 Then
+        MsgBox "B"
+    ElseIf score >= 70 Then
+        MsgBox "C"
+    ElseIf score >= 60 Then
+        MsgBox "D"
+    Else
+        MsgBox "F"
+    End If
+'If user does not enter anything and clicks enter
+ElseIf score = "" Then
+    MsgBox "You did not enter your score! Try again."
+'If user enters a string
+Else
+    MsgBox "You must enter a numeric score! Try again."
+End If
+
+End Sub
