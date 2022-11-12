@@ -1,0 +1,53 @@
+Option Explicit
+
+Sub DoLoop2()
+'Do while method 1
+'mid-test loop
+'No else statement required
+Dim x As Double
+x = 20
+Do
+    x = Sqr(x)
+    If x < 1.1 Then Exit Do
+    x = x ^ 1.5
+Loop
+MsgBox x
+End Sub
+
+Sub DoWhile2()
+'Do while method 2
+'There is no pre-test code and the loop
+'is continued on True/exited on False
+Dim i As Integer, ilim As Integer
+ilim = 25
+i = 4
+Do While i < ilim
+    i = i + 1
+Loop
+MsgBox i
+End Sub
+
+'if i =35 we skip through the loop and msgbox i
+Sub DoWhile3()
+Dim i As Integer, ilim As Integer
+ilim = 25
+i = 35
+'no pretext code block
+Do While i < ilim
+    i = i + 1
+Loop
+MsgBox i
+End Sub
+
+Sub LoopUntil2()
+'Do while method 3 Do until
+'post-test loop
+'Loop until<condition>
+Dim ilim As Integer, i As Integer
+ilim = 25
+Do
+    i = i + 1
+'post-test loop
+Loop Until i > ilim
+MsgBox i
+End Sub
