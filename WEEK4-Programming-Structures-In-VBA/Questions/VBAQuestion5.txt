@@ -1,0 +1,11 @@
+'Question: Which of the following sub successfully ensures that
+'x is positive and, if so, outputs the natural log of x?
+
+Sub InputValidation()
+Dim x As Double
+Do
+    x = InputBox("Enter a positive number:")
+    MsgBox "Your number is not positive! Try again."
+Loop
+MsgBox FormatNumber(Log(x), 2)
+End Sub
