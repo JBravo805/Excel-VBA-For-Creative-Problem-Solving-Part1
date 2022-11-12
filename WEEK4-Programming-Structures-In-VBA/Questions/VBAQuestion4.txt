@@ -1,0 +1,44 @@
+'End of video question
+'In the DoLooper sub, what value will be output in the msgbox
+Sub DoLooper2()
+Dim x As Double, c As Integer
+'no pre-test code block
+'but post-test loop aka loop until<condition>
+x = 10
+Do
+    x = x / 2
+    c = c + 1
+Loop Until x < 1
+MsgBox c
+End Sub
+'x=5, c=1
+'x=2.5, c=2
+'x=1.25, c=3
+'x=0.625, c=4
+
+'Which of the following charts correctly rep the vba code of
+Sub DoWhile4()
+Dim x As Integer, n As Integer, fx As Integer
+x = 5
+n = 0
+fx = 50
+Do While fx < 2
+    fx = 5 * x + 2
+    x = x - 1
+    n = n + 1
+Loop
+MsgBox n
+End Sub
+
+
+'!caution
+'What will happen when the following sub is run in vba?
+'this will run forever
+Sub test()
+Dim y As Integer
+'y = 5
+Do
+    If y = 7 Then Exit Do
+Loop
+MsgBox y
+End Sub
