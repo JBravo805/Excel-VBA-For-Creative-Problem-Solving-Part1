@@ -1,0 +1,16 @@
+Option Explicit
+
+'Create a VBA sub that will:
+'Uses Do...Loop to ensure that the user inputs a % conversion
+'must be between 0 and 100%. Draw Flowchart
+'input validation as I'm showing here, is only done in sub routines,
+'it is not performed in functions
+
+Sub ValidateInput()
+Dim P As Double
+Do
+    P = InputBox("Enter percent conversion:")
+    If P <= 100 And P >= 0 Then Exit Do
+    MsgBox "Percentage must be between 0 and 100"
+Loop
+End Sub
