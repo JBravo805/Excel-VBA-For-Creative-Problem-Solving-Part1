@@ -1,0 +1,31 @@
+'End of video question
+Function Halloween2(n As Integer) As Integer
+Dim i As Integer, sum As Integer
+For i = 1 To n
+    sum = sum + 2 * i
+Next i
+Halloween2 = i * sum
+End Function
+'1st loop > 2
+'i = 2, sum = 2
+'2nd loop > 6
+'i = 3, sum = 6
+'3rd loop > 12
+'i = 4, sum 12
+'4rd loop > 20
+'Tricky part in VBA, i is always incremented one last time
+'and always exits the For...Next loop at one greater than
+'the limit
+'Halloween2 = 5 * 20 =100
+
+'What does the following sub do?
+Sub SelectionLooper()
+Dim nr As Integer, i As Integer, c As Integer
+nr = Selection.Rows.count
+For i = 1 To nr
+    If Selection.Cells(i, 1) > 0 Then
+        c = c + Selection.Cells(i, 1)
+    End If
+Next i
+MsgBox c
+End Sub
