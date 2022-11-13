@@ -1,0 +1,61 @@
+Option Explicit
+
+Sub random()
+'Range("A1:I100") = WorksheetFunction.RandBetween(-1000, 1000)
+'RANDARRAY([rows],[columns],[min],[max],[integer])
+
+Range("A1:I100") = WorksheetFunction.RandArray(100, 8, -1000, 1000, True)
+'Range("A1:I100").Clear
+End Sub
+
+'Create a VBA sub that will delete -999 and -998 in a column of data.
+'I've added a count to count number of times a deletion has happened.
+Sub DeleteNegative999And998()
+Dim i As Integer, nr As Integer, c As Integer
+nr = Selection.Rows.Count
+For i = 1 To nr
+    If Selection.Cells(i, 1) = -999 Or Selection.Cells(i, 1) = -998 Then
+        Selection.Cells(i, 1) = ""
+        c = c + 1
+    End If
+Next i
+MsgBox ("From your selection " & c & " negative 999's and 998's were deleted.")
+End Sub
+
+'Alternatively using "ActiveCell"
+Sub DeleteNegative999And9982()
+Dim i As Integer, nr As Integer
+nr = Selection.Rows.Count
+For i = 1 To nr
+    If ActiveCell = -999 Or ActiveCell = -998 Then
+        ActiveCell.Clear
+        'Since we are using activecell we need to move down one cell so...
+    End If
+    ActiveCell.Offset(1, 0).Select
+Next i
+End Sub
+
+'What if we want to deleted the above numbers including all negative numbers
+'From any selection in the spreadsheet
+'And count the total deletions then...
+Sub CountDeleteNegativesAnd999And998()
+Dim i As Integer, j As Integer, nr As Integer, nc As Integer, c As Integer
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+For i = 1 To nr
+For j = 1 To nc
+    If Selection.Cells(i, j) = -999 Or ActiveCell(i, j) = -998 Then
+    'Replace with a blank
+    Selection.Cells(i, j) = ""
+    'count
+    c = c + 1
+    
+    ElseIf Selection.Cells(i, j) < 0 Then
+        Selection.Cells(i, j) = ""
+        c = c + 1
+
+    End If
+Next j
+Next i
+MsgBox ("Deleted " & c & " negatives numbers from your selection.")
+End Sub
