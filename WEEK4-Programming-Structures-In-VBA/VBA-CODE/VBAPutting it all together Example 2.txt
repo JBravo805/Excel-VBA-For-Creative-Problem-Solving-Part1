@@ -1,0 +1,18 @@
+Option Explicit
+
+Sub bubblesort()
+Dim n As Integer, i As Integer, j As Integer
+Dim temp As Double
+n = Selection.Rows.Count
+For i = 2 To n
+    For j = 2 To n
+        If Selection.Cells(j - 1, 1) > Selection.Cells(j, 1) Then
+        'We want to swap values. The idea is we want to arrange
+        'In ascending order if 'A(1) > A(2) then swap values
+            temp = Selection.Cells(j, 1) 'A(2)=3
+            Selection.Cells(j, 1) = Selection(j - 1, 1) 'A(1)=5
+            Selection.Cells(j - 1, 1) = temp 'A(1)=3 swapped!
+        End If
+    Next j
+Next
+End Sub
