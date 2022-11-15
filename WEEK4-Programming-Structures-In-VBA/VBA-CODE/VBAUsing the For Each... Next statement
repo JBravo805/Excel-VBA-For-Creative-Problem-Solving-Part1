@@ -1,0 +1,60 @@
+Option Explicit
+
+Sub FindSeven()
+Dim i As Integer, nr As Integer
+nr = Selection.Rows.Count
+For i = 1 To nr
+    If Selection.Cells(i, 1) = 7 Then
+        MsgBox "I found a 7!"
+    End If
+Next i
+End Sub
+
+Sub FindSeven2()
+Dim i As Integer, nr As Integer, c As Integer
+Call Reset
+nr = Selection.Rows.Count
+For i = 1 To nr
+    If Selection.Cells(i, 1) = 7 Then
+        c = c + 1
+        If c = 1 Then
+            Range("C1") = "7 found in row:"
+        End If
+        'Since C1 is taken we need to shift one cell down
+        Range("C" & c + 1) = i
+    End If
+Next i
+End Sub
+
+Sub Reset()
+Columns("C").Clear
+End Sub
+
+'Using the For Each ... Next statement object oriented
+'Using this method will give you the actual row meaning
+'That it is not relative to your selection. So, if you
+'select starting from row 6 to 13 and your first seven is
+'in row 10 then it will return that row.
+'The for ... next will return 5th row (its relative to your selection)
+Sub FindSevenForEach()
+'Dim two objects
+Dim rng As Object, itm As Object, c As Integer
+Call Reset
+'Instead of counting the number of rows we're going to take
+'the current selection and set it as range object
+Set rng = Selection
+'Instead of for i = 1 to nr. We're going to say
+'For Each itm, so that's each item in our range.
+For Each itm In rng
+    'Instead of Selection.Cells we're going to say itm.
+    'So if the item in our range equals 7
+    If itm = 7 Then
+        c = c + 1
+        If c = 1 Then
+            Range("C1") = "7 found in row:"
+        End If
+        'Here we're going change to itm.Row
+        Range("C" & c + 1) = itm.Row
+    End If
+Next
+End Sub
