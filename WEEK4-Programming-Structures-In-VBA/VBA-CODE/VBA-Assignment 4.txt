@@ -1,0 +1,74 @@
+Option Explicit
+
+Function prime(n As Integer) As Boolean
+'True is stored as -1 and false as 0.
+'Any non-zero value is considered as true.
+'1 is not prime
+'0 is not prime
+Dim i As Integer
+'Declare every n integer prime unless it passes the
+'if < n mod i =0 > test
+prime = True
+'We tell the program that 1 is False or not prime
+If n = 1 Then
+    prime = False
+ElseIf n > 2 Then
+'we use n-1 since any number mod itself will be equal to 0
+'i.e. if we have n = 5 then we have
+' 5 mod 2 = 1, ... , 5 mod 5 = 0 which is False, but we
+'know that 5 is prime so we need the range to be
+'n-1. n = 5, n-1 = 4, i = 2,3,4
+'5 mod 2 = 1, ..., 5 mod 4 = 1 which is the result we
+'want for any prime
+    For i = 2 To n - 1
+    If n Mod i = 0 Then
+        prime = False
+    Exit Function
+    End If
+
+
+Next i
+End If
+End Function
+
+Function countprime(n1 As Integer, n2 As Integer) As Integer
+Dim i As Integer
+For i = n1 To n2
+    countprime = countprime - prime(i)
+Next i
+End Function
+
+
+Sub prime2()
+'True is stored as -1 and false as 0.
+'Any non-zero value is considered as true.
+'1 is not prime
+'0 is not prime
+Dim i As Integer, n As Integer, divisors As Integer
+'n = InputBox("Enter a number:")
+'Initiliaze divisor with 0
+divisors = 0
+n = InputBox("Enter a number:")
+'After the user has entered a number, we want to check whether this
+'number is a prime number or not. Remember,
+'a prime number has exactly two distinct number divisors:
+'1 and itself.
+For i = 1 To n
+'We want to calculate the number of divisors of a number
+'The mod operator gives the remainder of a division. example
+'7 mod 2 = 1 since 7/2 = 3 with a remainder of 1.
+'only if number mod i = 0, i is a divisor of number.
+If n Mod i = 0 Then
+    divisors = divisors + 1
+End If
+Next i
+'Note that i =1 and i = n always are divisors of the number n.
+'Only if these numbers are the only divisors then its prime
+'example n = 3, 3 mod 1 = 0, 3 mod 2 =1, 3 mod 3 = 0
+'hence every prime is divisible by exactly 1 and itself.
+If divisors = 2 Then
+    MsgBox n & " is a prime number"
+Else
+    MsgBox n & " is not a prime number"
+End If
+End Sub
