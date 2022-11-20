@@ -1,0 +1,96 @@
+Option Explicit
+
+Sub HighTemp()
+'This is important we must set HT as a variant
+'A vba variable called variant has not been declared to have a
+'specific data type.Thus, it can hold any type of data
+Dim nr As Integer, i As Integer, HT As Variant, c As Integer
+'This is so the user does not see any of the background
+'stuff going on such as cells being higlighted etc.
+Application.ScreenUpdating = False
+'If our active cell is not in the current selection this will not work
+Range("A2").Select
+Call Reset
+Selection.CurrentRegion.Select
+HT = Application.InputBox("Display the days in the year that exceeded what temperature?", , , , , , , 3)
+nr = Selection.Rows.Count
+'If user clicks cancel or exit then will close window
+If HT = False Then Exit Sub
+'We don't start at row one since its just the headers
+'Thus we start at i = 2
+If IsNumeric(HT) Then
+    'If we want to be precise we can check for only integers
+    If CStr(CInt(HT)) <> HT Then
+        MsgBox "Temperature must be an integer! Try again."
+    End If
+For i = 2 To nr
+'i=163 when first temp is above 90
+'Debug assert so we don't have to go through all the days
+'b4 a temp of 90 is reached...saving time!
+    'Debug.Assert Selection.Cells(i, 4) <= HT
+    If Selection.Cells(i, 4) > HT Then
+        c = c + 1
+        If c = 1 Then
+            Range("G1") = "Date"
+            Range("H1") = "Temperature"
+        End If
+    Range("G" & c + 1) = Selection.Cells(i, 2) & "/" & Selection.Cells(i, 3) & "/" & Selection.Cells(i, 1)
+    Range("H" & c + 1) = Selection.Cells(i, 4)
+    
+    End If
+Next i
+ElseIf HT = "" Then
+    MsgBox "You did not enter a temperature! Try again."
+Else
+    MsgBox "You did not enter a numeric integer for High Temperature! Try again."
+End If
+'Range("A1").Select
+End Sub
+
+Sub Reset()
+Columns("G:H").Clear
+
+End Sub
+
+Sub LowTemp()
+'This is important we must set HT as a variant
+'A vba variable called variant has not been declared to have a
+'specific data type.Thus, it can hold any type of data
+Dim i As Integer, LT As Variant, c As Integer, nr As Integer
+'This is so the user does not see any of the background
+'stuff going on such as cells being higlighted etc.
+Application.ScreenUpdating = False
+'Always start at cell A2
+Range("A2").Select
+Call Reset
+Selection.CurrentRegion.Select
+LT = Application.InputBox("Display the days in the year that were below what temperature?:", , , , , , , 3)
+nr = Selection.Rows.Count
+'If user clicks cancel or exit program will end
+If LT = False Then Exit Sub
+If IsNumeric(LT) Then
+    'if we to take only integers then
+    If CStr(CInt(LT)) <> LT Then
+        MsgBox "Low temperature must be an integer! Try again"
+    End If
+    'We start at i=2 since row 1 contains the headers
+    For i = 2 To nr
+        'If the low temp is less than LT entered then
+        If Selection.Cells(i, 5) < LT Then
+            c = c + 1
+            If c = 1 Then
+                Range("G1") = "Date"
+                Range("H1") = "Temperature"
+            End If
+        'since row1 is used for Date and Temp we need to
+        'shift one cell down for the remanining
+            Range("G" & c + 1) = Selection.Cells(i, 2) & "/" & Selection.Cells(i, 3) & "/" & Selection.Cells(i, 1)
+            Range("H" & c + 1) = Selection.Cells(i, 5)
+        End If
+Next i
+ElseIf LT = "" Then
+    MsgBox "You did not enter a low temperature! Try again."
+Else
+    MsgBox "You did not enter a numeric value for low temperature! Try again"
+End If
+End Sub
