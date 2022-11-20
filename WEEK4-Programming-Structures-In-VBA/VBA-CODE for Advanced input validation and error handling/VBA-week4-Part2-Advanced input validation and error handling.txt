@@ -1,0 +1,118 @@
+Option Explicit
+
+'Next modification is we check if G is numeric
+'We need to change G to a variant
+'In short a variant is a vba variable that does not hold a specific data type
+'Thus it can be text, numbers, dates, times, or objects
+Sub guessingame5()
+Dim n As Integer, G As Variant
+On Error GoTo here
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+        'Inner Do Loop
+        'From the flowchart we need an two-way if statement
+        'Check if G is numeric
+        G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+        If IsNumeric(G) Then
+            If G > 1 And G < 10 And CStr(CInt(G)) = n Then
+                Exit Do
+            ElseIf G > 10 Then
+                MsgBox ("Guess must not exceed 10! Try again.")
+            ElseIf G < 1 Then
+                MsgBox ("Guess must not be less than 1! Try again.")
+            ElseIf CStr(CInt(G)) <> G Then
+                MsgBox ("Guess must be an integer! Try again.")
+            End If
+        Else
+            MsgBox ("Guess must be numeric! Try again.")
+            'We need to exit the loop ow this will repeat
+            Exit Sub
+        End If
+    Loop
+    'Outer Loop
+    If G = n Then Exit Do
+        MsgBox ("Guess again!")
+Loop
+MsgBox ("Congrats! You guessed the number")
+here:
+MsgBox ("An error has occurred.")
+End Sub
+
+'Now in all three situations if user
+'Closes inputbox, clicks cancel, or clicks ok yield the same result
+'This result is an empty string
+Sub guessinggame6()
+Dim n As Integer, G As Variant
+On Error GoTo here
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+      G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+      If IsNumeric(G) Then
+        If G > 1 And G < 10 And CStr(CInt(G)) = G Then
+            Exit Do
+        ElseIf G > 10 Then
+            MsgBox ("Guess must not exceed 10! Try again")
+        ElseIf G < 1 Then
+            MsgBox ("Guess must not be less than 1! Try again")
+        ElseIf CStr(CInt(G)) <> G Then
+            MsgBox ("Guess must be an integer! Try again")
+        End If
+    'we have checked if G >10 and G < 1 and if G is non-int
+    'Recall that exit, cancel, and not entering anything yiels same result
+    ElseIf G = "" Then
+        MsgBox ("You did not enter anything! Try again.")
+    Else
+        MsgBox ("Guess must be a number! Try again.")
+    End If
+    Loop
+    'Now that we have exited the loop we check if G = n
+    If G = n Then Exit Do
+        MsgBox ("Guess again!")
+Loop
+'Now we can exit the outer Do Loop and output the response
+MsgBox ("Congrats! You guessed the number")
+here:
+MsgBox ("An error has occurred.")
+End Sub
+
+'However we are still not differentiating if user
+'clicks cancel or close
+'Now we shall modify so that it will simply end the program all together
+Sub Finalguessingame()
+Dim n As Integer, G As Variant
+'We don't need on error goto here since this code handles when user
+'Clicks cancel/exit or does not enter anything
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+    'The important thing to note here is 3 means it can accomdate strings and numbers
+    'Designed such that if user clicks cancels or closes out then output is False
+    G = Application.InputBox("I'm thinking of a number between 1 and 10. What's your guess?", , , , , , , 3)
+    'If user clicks cancel or exit then the program will end
+    If G = False Then Exit Sub
+    'Now we check if G is numeric
+    If IsNumeric(G) Then
+        If G > 1 And G < 10 And CStr(CInt(G)) = G Then
+            Exit Sub
+        ElseIf G > 10 Then
+            MsgBox ("Guess must not exceed 10! Try again.")
+        ElseIf G < 1 Then
+            MsgBox ("Guess must not be less than 1! Try again.")
+        ElseIf CStr(CInt(G)) <> G Then
+            MsgBox ("Guess must be an integer! Try again.")
+        End If
+    'Now we check is user enters a string or does not enter anything
+    ElseIf G = "" Then
+        MsgBox ("You did not enter anything! Try again.")
+    Else
+        MsgBox ("Guess must be a number! Try again.")
+    End If
+    Loop
+    'We have exited the inner Do Loop now we check if G = n
+    If G = n Then Exit Do
+        MsgBox ("Guess again")
+Loop
+MsgBox ("Congrats! You guessed the number.")
+End Sub

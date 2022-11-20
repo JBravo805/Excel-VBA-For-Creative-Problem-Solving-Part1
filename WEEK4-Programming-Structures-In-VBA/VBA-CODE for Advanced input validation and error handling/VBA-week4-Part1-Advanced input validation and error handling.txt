@@ -1,0 +1,96 @@
+Option Explicit
+
+Sub guessinggame()
+Dim n As Integer, G As Integer
+'Returns a random integer number between the numbers
+'that you specify. A new random integer number is
+'returned every time the worksheet is calculated
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+    If G = n Then Exit Do
+        MsgBox "Guess again!"
+Loop
+MsgBox ("Congrats! You guessed the number!")
+End Sub
+
+Sub guessinggame2()
+'This does not handle if user enters letters or if user
+'clicks cancel, exit or clicks ok button without entering anything
+Dim n As Integer, G As Integer
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    'Outer Do Loop once we the inside Do Loop is done we check if G = n
+    Do
+        'First we need to check if G > 1 and G < 10
+        G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+        If G > 1 And G < 10 Then
+            Exit Do
+        ElseIf G > 10 Then
+            MsgBox "Guess must not exceed 10! Try again."
+        ElseIf G < 1 Then
+            MsgBox "Guess must not be less than 1! Try again."
+        End If
+    Loop
+    'Now that we have checked our conditions.
+    'Let's check if our guess is correct
+    If G = n Then Exit Do
+        MsgBox "Guess again!"
+Loop
+MsgBox ("Congrats! You guessed the number.")
+
+Sub guessinggame3()
+'This version will handle errors such as when user enters
+'Characters, clicks cancel/exit, or clicks ok button
+'However the ever is not specific. It does not say what kind of error
+Dim n As Integer, G As Integer
+On Error GoTo here
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+        G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+        If G < 1 And G < 10 Then
+            Exit Do
+        ElseIf G > 10 Then
+            MsgBox ("Guess must not be greater than 10! Try again")
+        ElseIf G < 1 Then
+            MsgBox ("Guess must not be less than 1! Try again")
+        End If
+    Loop
+    If G = n Then Exit Do
+        MsgBox ("Guess again!")
+Loop
+MsgBox ("Congrats! You guessed the number.")
+here:
+MsgBox "An error has occurred."
+End Sub
+
+'Next modification will handle is user enters a non-integer
+'In vba this will be rounded. So, we need to take care of this.
+Sub guessingame4()
+'To allow non-integers we change G to Double
+Dim n As Integer, G As Double
+On Error GoTo here
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+        'We need to check that G > 1 and G < 10 and G is non-int
+        G = InputBox("I'm thinking of a number between 1 and 10. What's your guess?")
+        If G > 1 And G < 10 And CStr(CInt(G)) = G Then
+            Exit Do
+        ElseIf G > 10 Then
+            MsgBox ("Guess must not be greater than 10! Try again")
+        ElseIf G < 1 Then
+            MsgBox ("Guess must not be less than 1! Try again")
+        'Check if G is an integer
+        ElseIf CStr(CInt(G)) <> G Then
+            MsgBox ("Guess must be an integer! Try again")
+        End If
+    Loop
+    If G = n Then Exit Do
+        MsgBox ("Guess again!")
+Loop
+MsgBox ("Congrats! You guessed the number")
+here:
+MsgBox ("An error has occurred.")
+End Sub
